@@ -9,9 +9,6 @@ from models import storage
 
 # flask setup
 app = Flask(__name__)
-app.url_map.strict_slashes = False
-port = 5000
-host = '0.0.0.0'
 
 
 # begin flask page rendering
@@ -24,7 +21,7 @@ def teardown_db(exception):
     storage.close()
 
 
-@app.route('/3-hbnb')
+@app.route('/3-hbnb', strict_slashes=False)
 def hbnb_filters(the_id=None):
     """
     handles request to custom template with states, cities & amentities
@@ -43,7 +40,8 @@ def hbnb_filters(the_id=None):
                            users=users,
                            cache_id=cache_id)
 
+
 if __name__ == "__main__":
     """
     MAIN Flask App"""
-    app.run(host=host, port=port)
+    app.run(debug=True, host='0.0.0.0', port='5000')
